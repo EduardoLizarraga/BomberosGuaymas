@@ -5,9 +5,12 @@
  */
 package vistas;
 
+import dataBase.Estaciones;
 import dataBase.Personals;
+import entidades.Estacion;
 import entidades.Personal;
 
+import javax.swing.DefaultComboBoxModel;
 /**
  *
  * @author EduardoHumberto
@@ -16,12 +19,35 @@ public class vistaPersonal extends javax.swing.JFrame {
     public int tipoP;
     static public int numT;
     Personal p = new Personal();
+    static int est;
+    Estaciones es= new Estaciones();
+    
+    
     /**
      * Creates new form vistaPersonal
      */
     public vistaPersonal() {
         initComponents();
         
+//        DefaultTableModel tablemodel = (DefaultTableModel)tblEstacion.getModel();
+//        for (Estacion e:estaciones.obtenerTodos()) {
+//            tablemodel.addRow(new Object[]{e.getNombreEstacion(),e.getDomicilioEstacion()});
+//        }
+//        tblEstacion.setModel(tablemodel);
+//        
+        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboEstacion.getModel();
+        
+        for (Estacion e: es.obtenerTodos()){
+//            comboTipoP.addItem(e.getNombreEstacion());
+                      
+                      
+                     comboModel.addElement(e.getNombreEstacion());
+                     comboModel.getElementAt(e.getId());
+                      
+                      
+        }
+        jComboEstacion.setModel(comboModel);
+       
         
     }
 
@@ -61,8 +87,6 @@ public class vistaPersonal extends javax.swing.JFrame {
                 comboTipoPActionPerformed(evt);
             }
         });
-
-        jComboEstacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Centro", "Sur", "Norte" }));
 
         btnAgregarP.setText("Agregar");
         btnAgregarP.addActionListener(new java.awt.event.ActionListener() {
@@ -137,23 +161,26 @@ public class vistaPersonal extends javax.swing.JFrame {
     
     private void btnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPActionPerformed
 tipoP= comboTipoP.getSelectedIndex()+1;
-        switch (tipoP) 
-        {
-            case 1:  numT=1;
-//p.setTipoPersonal(1);
-                     break;
-            case 2: numT=2; 
-                //p.setTipoPersonal(2);
-                     break;
-        }
+//        switch (tipoP) 
+//        {
+//            case 1:  numT=1;
+//
+//                     break;
+//            case 2: numT=2; 
+//
+//                     break;
+//        }
 
                    p.setNombrePersonal(txtNombreP.getText());
                     p.setApellidoPersonal(txtApellidoP.getText());
                    //tipoP=3;
-                   p.setTipoPersonal(tipoP);
+                   
+                   p.setTipoPersonal(comboTipoP.getSelectedIndex()+1);
+                   
+                  
+                   
                     
-                    
-                   p.setIdEstacion(1);
+                   p.setIdEstacion(jComboEstacion.getSelectedIndex()+1);
 
                     Personals ps=new Personals();
                     ps.guardar(p);
@@ -189,6 +216,7 @@ tipoP= comboTipoP.getSelectedIndex()+1;
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(vistaPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

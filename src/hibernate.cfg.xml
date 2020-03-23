@@ -28,7 +28,15 @@
             
         <mapping class="entidades.Personal"/>
         
-        <mapping class="entidades.TipoPersonal"/>
+        <mapping class="entidades.llamadoIncendio"/>
+        
+        <mapping class="entidades.tipoIncendio"/>
+        
+        <mapping class="entidades.tipoApoyo"/>
+        
+        <mapping class="entidades.Unidad"/>
+        
+       <mapping class="entidades.TipoPersonal"/>
         
         
         
