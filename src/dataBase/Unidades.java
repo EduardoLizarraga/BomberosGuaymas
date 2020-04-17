@@ -19,7 +19,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 public class Unidades {
-    public List<Unidad> obtenerTodos() {
+    
+    private int idU;
+    private int numU;
+    public List<Unidad> obtenerTodos(int pos) {
      List<Unidad> unidad = new ArrayList<Unidad>();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -36,6 +39,22 @@ public class Unidades {
         return unidad;
     }
     
+      public int obteneridU(){//recupera el id de la estacion seleccionada
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+
+        Unidad unidad = (Unidad) session.createQuery("SELECT p FROM Unidad p WHERE p.numeroUnidad="+numU).uniqueResult();
+ return unidad.getId();
+    }
+    
+      public int obtenernumU(){//recupera el id de la estacion seleccionada
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+
+        Unidad unidad = (Unidad) session.createQuery("SELECT p FROM Unidad p WHERE id="+idU).uniqueResult();
+ return unidad.getNumeroUnidad();
+    }
+     
     
     public void guardar(Unidad unidad){
         try {
@@ -71,5 +90,21 @@ public class Unidades {
         } catch (Exception e) {
             System.out.println("Ocurrió un error al intentar eliminar el objeto");
         }
+    }
+
+    public int getUdU() {
+        return idU;
+    }
+
+    public void setUdU(int udU) {
+        this.idU = udU;
+    }
+
+    public int getNumU() {
+        return numU;
+    }
+
+    public void setNumU(int numU) {
+        this.numU = numU;
     }
 }

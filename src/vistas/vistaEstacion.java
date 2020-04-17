@@ -18,16 +18,17 @@ public class vistaEstacion extends javax.swing.JFrame {
     /**
      * Creates new form vistaEstacion
      */
+   
+    /**
+     * Creates new form vistaEstacion
+     */
     Estaciones estaciones = new Estaciones();
+    
+    
     public vistaEstacion() {
         initComponents();
         
-        DefaultTableModel tablemodel = (DefaultTableModel)tblEstacion.getModel();
-        for (Estacion e:estaciones.obtenerTodos()) {
-            tablemodel.addRow(new Object[]{e.getNombreEstacion(),e.getDomicilioEstacion()});
-        }
-        tblEstacion.setModel(tablemodel);
-    }
+table();}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +48,7 @@ public class vistaEstacion extends javax.swing.JFrame {
         btnAgregarE = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEstacion = new javax.swing.JTable();
+        btnEliminarE = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +87,13 @@ public class vistaEstacion extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblEstacion);
 
+        btnEliminarE.setText("Eliminar");
+        btnEliminarE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -107,7 +116,9 @@ public class vistaEstacion extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnAgregarE)
-                                .addGap(189, 189, 189)))
+                                .addGap(47, 47, 47)
+                                .addComponent(btnEliminarE)
+                                .addGap(69, 69, 69)))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
@@ -128,7 +139,9 @@ public class vistaEstacion extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(219, 219, 219)
-                        .addComponent(btnAgregarE))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregarE)
+                            .addComponent(btnEliminarE)))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -155,11 +168,13 @@ public class vistaEstacion extends javax.swing.JFrame {
 Estacion e = new Estacion();
                     e.setNombreEstacion(txtEstacion.getText());
                     e.setDomicilioEstacion(jTextUbicacion.getText());
-                    
-
                     Estaciones es=new Estaciones();
                     es.guardar(e);
     }//GEN-LAST:event_btnAgregarEActionPerformed
+
+    private void btnEliminarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEActionPerformed
+new Estaciones().eliminar1(tblEstacion.getSelectedRow());
+    }//GEN-LAST:event_btnEliminarEActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,9 +210,18 @@ Estacion e = new Estacion();
             }
         });
     }
+    
+    public void table (){
+        DefaultTableModel tablemodel = (DefaultTableModel)tblEstacion.getModel();
+        for (Estacion e:estaciones.obtenerTodos(ERROR)) {
+            tablemodel.addRow(new Object[]{e.getNombreEstacion(),e.getDomicilioEstacion()});
+        }
+        tblEstacion.setModel(tablemodel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarE;
+    private javax.swing.JButton btnEliminarE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

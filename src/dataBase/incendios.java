@@ -19,7 +19,7 @@ import org.hibernate.Session;
  */
 public class incendios {
     
-      public List<llamadoIncendio> obtenerTodos() {
+      public List<llamadoIncendio> obtenerTodos(int pos) {
         List<llamadoIncendio> incendio = new ArrayList<llamadoIncendio>();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table (name="tblincendio")
 public class llamadoIncendio {
     private int id;
-    private int tipoIncendio;
+    private String tipoIncendio;
     private Date fechaIncendio;
     private String direccionIncendio;
     private String reportanteIncendio;
@@ -20,7 +20,7 @@ public class llamadoIncendio {
     private int idUnidad;
     private int idBombero;
     private String descripcionIncendio;
-    private int tipoApoyo;
+    private String tipoApoyo;
 
     
      @Id
@@ -33,13 +33,7 @@ public class llamadoIncendio {
         this.id = id;
     }
 
-    public int getTipoIncendio() {
-        return tipoIncendio;
-    }
-
-    public void setTipoIncendio(int tipoIncendio) {
-        this.tipoIncendio = tipoIncendio;
-    }
+  
 
     public Date getFechaIncendio() {
         return fechaIncendio;
@@ -105,13 +99,23 @@ public class llamadoIncendio {
         this.descripcionIncendio = descripcionIncendio;
     }
 
-    public int getTipoApoyo() {
+    public String getTipoIncendio() {
+        return tipoIncendio;
+    }
+
+    public void setTipoIncendio(String tipoIncendio) {
+        this.tipoIncendio = tipoIncendio;
+    }
+
+    public String getTipoApoyo() {
         return tipoApoyo;
     }
 
-    public void setTipoApoyo(int tipoApoyo) {
+    public void setTipoApoyo(String tipoApoyo) {
         this.tipoApoyo = tipoApoyo;
     }
+
+    
     
     
     

@@ -24,7 +24,7 @@ public class Personal {
     private int id;
     private String nombrePersonal;
     private String apellidoPersonal;
-    private int tipoPersonal ;
+    private String tipoPersonal ;
     private int idEstacion;
 
     @Id
@@ -63,13 +63,15 @@ public class Personal {
         this.idEstacion = idEstacion;
     }
 
-    public int getTipoPersonal() {
+    public String getTipoPersonal() {
         return tipoPersonal;
     }
 
-    public void setTipoPersonal(int tipoPersonal) {
+    public void setTipoPersonal(String tipoPersonal) {
         this.tipoPersonal = tipoPersonal;
     }
+
+   
     
     
    

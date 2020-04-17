@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 
 /**
@@ -19,7 +20,13 @@ import org.hibernate.Session;
  */
 public class Estaciones {
     
-    public List<Estacion> obtenerTodos() {
+  private String nomE;
+  private int idE;
+  
+    
+   private Estacion es = new Estacion();
+    
+    public List<Estacion> obtenerTodos( int pos) {
         List<Estacion> estacion = new ArrayList<Estacion>();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -35,6 +42,35 @@ public class Estaciones {
         }
         return estacion;
     }
+    
+    
+    public int obteneridE(){//recupera el id de la estacion seleccionada
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+//       Estacion profesor = (Estacion) session.createQuery("SELECT p FROM Estacion p WHERE id="+i).uniqueResult();
+//System.out.println("Profesor con Id 1001=" +  profesor.getNombreEstacion());
+
+//Estacion profesor = (Estacion) session.createQuery("SELECT p FROM Estacion p WHERE p.nombreEstacion ='Centro'").uniqueResult();
+//System.out.println("Profesor con Id 1001=" + profesor.getId());
+ 
+
+
+//Estacion profesor = (Estacion) session.createQuery("SELECT p FROM Estacion p WHERE p.nombreEstacion='"+idE+"'").uniqueResult();
+//System.out.println("Profesor con Id 1001=" + profesor.getId()); este es el chilo
+    Estacion est = (Estacion) session.createQuery("SELECT p FROM Estacion p WHERE p.nombreEstacion='"+nomE+"'").uniqueResult();
+//System.out.println("Profesor con Id 1001=" + profesor.getId());   
+
+return est.getId();
+    }
+    
+    public String obtenerNombreE (){//recupera el nombre de la estacion selecionada
+        Session session = HibernateUtil.getSessionFactory().openSession();
+           Estacion est = (Estacion) session.createQuery("SELECT p FROM Estacion p WHERE id="+idE).uniqueResult();
+ 
+return est.getNombreEstacion();
+}
+    
+       
     
     public void guardar(Estacion estaciones){
         try {
@@ -60,6 +96,23 @@ public class Estaciones {
         }
     }
     
+   public void eliminar1(int pos) {
+        Estacion c = new Estacion();
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            c = (Estacion) session.get(Estacion.class, obtenerTodos(pos).get(pos).getId());
+            
+            session.delete(c);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error al intentar obtener registros");
+        }
+    }
+
+
+    
     public void modificar(Estacion estaciones){
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -70,6 +123,30 @@ public class Estaciones {
         } catch (Exception e) {
             System.out.println("Ocurrió un error al intentar eliminar el objeto");
         }
+    }
+
+    public String getNomE() {
+        return nomE;
+    }
+
+    public void setNomE(String nomE) {
+        this.nomE = nomE;
+    }
+
+    public Estacion getEs() {
+        return es;
+    }
+
+    public void setEs(Estacion es) {
+        this.es = es;
+    }
+
+    public int getIdE() {
+        return idE;
+    }
+
+    public void setIdE(int idE) {
+        this.idE = idE;
     }
     
 }

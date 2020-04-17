@@ -9,19 +9,17 @@ import dataBase.Estaciones;
 import dataBase.Personals;
 import entidades.Estacion;
 import entidades.Personal;
-
 import javax.swing.DefaultComboBoxModel;
 /**
  *
  * @author EduardoHumberto
  */
 public class vistaPersonal extends javax.swing.JFrame {
-    public int tipoP;
+ public int tipoP;
     static public int numT;
     Personal p = new Personal();
     static int est;
     Estaciones es= new Estaciones();
-    
     
     /**
      * Creates new form vistaPersonal
@@ -29,27 +27,17 @@ public class vistaPersonal extends javax.swing.JFrame {
     public vistaPersonal() {
         initComponents();
         
-//        DefaultTableModel tablemodel = (DefaultTableModel)tblEstacion.getModel();
-//        for (Estacion e:estaciones.obtenerTodos()) {
-//            tablemodel.addRow(new Object[]{e.getNombreEstacion(),e.getDomicilioEstacion()});
-//        }
-//        tblEstacion.setModel(tablemodel);
-//        
-        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboEstacion.getModel();
+
+
+   DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboEstacion.getModel();
         
-        for (Estacion e: es.obtenerTodos()){
-//            comboTipoP.addItem(e.getNombreEstacion());
-                      
-                      
-                     comboModel.addElement(e.getNombreEstacion());
+
+for (Estacion e: es.obtenerTodos(ERROR)){
+     comboModel.addElement(e.getNombreEstacion());
                      comboModel.getElementAt(e.getId());
-                      
-                      
-        }
+       }
         jComboEstacion.setModel(comboModel);
-       
-        
-    }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,11 +70,6 @@ public class vistaPersonal extends javax.swing.JFrame {
         jLabel4.setText("Estación ");
 
         comboTipoP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Director", "Supervisor", "Bombero", " " }));
-        comboTipoP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTipoPActionPerformed(evt);
-            }
-        });
 
         btnAgregarP.setText("Agregar");
         btnAgregarP.addActionListener(new java.awt.event.ActionListener() {
@@ -170,26 +153,35 @@ tipoP= comboTipoP.getSelectedIndex()+1;
 //
 //                     break;
 //        }
+String nombree;
+int idEstacion;
+
 
                    p.setNombrePersonal(txtNombreP.getText());
                     p.setApellidoPersonal(txtApellidoP.getText());
                    //tipoP=3;
                    
-                   p.setTipoPersonal(comboTipoP.getSelectedIndex()+1);
+                   p.setTipoPersonal(Integer.toString(comboTipoP.getSelectedIndex()+1));
+                   
                    
                   
-                   
-                    
-                   p.setIdEstacion(jComboEstacion.getSelectedIndex()+1);
+                 nombree= String.valueOf( jComboEstacion.getSelectedItem());
+                 
+                 
+                   System.out.println(nombree);
 
+                  es.setNomE(nombree);
+
+
+                  idEstacion= es.obteneridE();
+                  
+                  es.setIdE(idEstacion);
+                  
+                  
+                  p.setIdEstacion(idEstacion);
                     Personals ps=new Personals();
                     ps.guardar(p);
     }//GEN-LAST:event_btnAgregarPActionPerformed
-
-    private void comboTipoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoPActionPerformed
-
-        
-    }//GEN-LAST:event_comboTipoPActionPerformed
 
     /**
      * @param args the command line arguments

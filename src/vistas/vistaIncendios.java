@@ -4,14 +4,18 @@
  * and open the template in the editor.
  */
 package vistas;
-
+import dataBase.Personals;
+import dataBase.Unidades;
 import dataBase.incendios;
+import entidades.Personal;
+import entidades.Unidad;
 import entidades.llamadoIncendio;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.DefaultComboBoxModel;
 
 import javax.swing.JOptionPane;
 
@@ -20,25 +24,28 @@ import javax.swing.JOptionPane;
  * @author EduardoHumberto
  */
 public class vistaIncendios extends javax.swing.JFrame {
-    static int tipoI;
-    static int unidad;
-    static int bombero;
+     static int tipoI;
     static int apoyo;
+    public int personal;
 //Calendar fecha = Calendar.getInstance();    
     
     llamadoIncendio tipo= new llamadoIncendio();
     Calendar fecha = new GregorianCalendar();
-
-
+Personals per = new Personals();
+Unidades Un = new Unidades ();
+Unidad U = new Unidad();
     /**
      * Creates new form vistaIncendios
      */
     public vistaIncendios() {
         initComponents();
-        Date date = new Date();
+      Date date = new Date();
         
 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 System.out.println("Fecha: "+dateFormat.format(date));
+
+ conboB();
+  ComboU();
 
     }
 
@@ -126,10 +133,6 @@ System.out.println("Fecha: "+dateFormat.format(date));
         jLabel5.setText("Bombero      ");
 
         jLabel6.setText("Apoyo prestado");
-
-        jComboUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidad 1", "Unidad 2", "Unidad 3" }));
-
-        jComboBombero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kemonito", "Monchis", "Ángel" }));
 
         jComboApoyo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ambulancia", "Policía Municipal", "Policía Federal" }));
 
@@ -284,8 +287,8 @@ JOptionPane.showMessageDialog(null,"Incendio de maleza");
     }//GEN-LAST:event_btnIncendioMActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-unidad= jComboUnidad.getSelectedIndex()+1;
-bombero = jComboBombero.getSelectedIndex()+1;
+
+
 apoyo= jComboApoyo.getSelectedIndex()+1;
 //        int dia = fecha.get(Calendar.DATE);
 //        Calendar.
@@ -293,19 +296,43 @@ apoyo= jComboApoyo.getSelectedIndex()+1;
 //        int año = Calendar.YEAR;
 
 Date date = new Date();
+
+ int idbombero;
+  String bombero;
         
-DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        
-        tipo.setTipoIncendio(tipoI);
+bombero= String.valueOf( jComboBombero.getSelectedItem());
+per.setNombreP(bombero);
+idbombero= per.obteneridP();
+per.setIdP(idbombero);
+     
+int unidad;
+int idU;
+
+String ud;
+ud= String.valueOf(jComboUnidad.getSelectedItem());
+unidad = Integer.parseInt(ud);
+Un.setNumU(unidad);
+idU= Un.obteneridU();
+Un.setUdU(idU);
+
+Un.setNumU(unidad);
+idU= Un.obteneridU();
+
+
+ unidad= Un.getUdU();
+Un.setUdU(unidad);
+        tipo.setTipoIncendio(Integer.toString(tipoI));
         tipo.setFechaIncendio(date);
         tipo.setDireccionIncendio(jTexUbic.getText());
         tipo.setReportanteIncendio(txtTel.getText());
         tipo.setDanoIncendio(jTextDanos.getText());
         tipo.setHerramientaIncendio(txtHerramienta.getText());
         tipo.setIdUnidad(unidad);
-        tipo.setIdBombero(bombero);
+        System.out.println(idU);
+        tipo.setIdBombero(idbombero);
+        System.out.println(idbombero);
         tipo.setDescripcionIncendio(txtDescripcion.getText());
-        tipo.setTipoApoyo(apoyo);
+        tipo.setTipoApoyo(Integer.toString(apoyo));
         
         
          incendios in=new incendios();
@@ -346,6 +373,24 @@ DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
                 new vistaIncendios().setVisible(true);
             }
         });
+    }
+    
+    public void conboB (){
+         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboBombero.getModel();
+      for (Personal e: per.obtenerTodos(ERROR)){
+     comboModel.addElement(e.getApellidoPersonal());
+                     comboModel.getElementAt(e.getId());
+       }
+        jComboBombero.setModel(comboModel);
+    }
+    
+    public void ComboU(){
+        DefaultComboBoxModel comboModel2 = (DefaultComboBoxModel) jComboUnidad.getModel();
+      for (Unidad e: Un.obtenerTodos(ERROR)){
+     comboModel2.addElement((e.getNumeroUnidad()));
+                     comboModel2.getElementAt(e.getId());
+       }
+        jComboUnidad.setModel(comboModel2);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
