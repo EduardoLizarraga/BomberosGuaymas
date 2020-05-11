@@ -18,17 +18,16 @@ public class vistaEstacion extends javax.swing.JFrame {
     /**
      * Creates new form vistaEstacion
      */
-   
     /**
      * Creates new form vistaEstacion
      */
     Estaciones estaciones = new Estaciones();
-    
-    
+
     public vistaEstacion() {
         initComponents();
-        
-table();}
+
+        table();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -165,15 +164,18 @@ table();}
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEActionPerformed
-Estacion e = new Estacion();
-                    e.setNombreEstacion(txtEstacion.getText());
-                    e.setDomicilioEstacion(jTextUbicacion.getText());
-                    Estaciones es=new Estaciones();
-                    es.guardar(e);
+        Estacion e = new Estacion();
+        e.setNombreEstacion(txtEstacion.getText());
+        e.setDomicilioEstacion(jTextUbicacion.getText());
+        Estaciones es = new Estaciones();
+        es.guardar(e);
+        table();
+
     }//GEN-LAST:event_btnAgregarEActionPerformed
 
     private void btnEliminarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEActionPerformed
-new Estaciones().eliminar1(tblEstacion.getSelectedRow());
+        new Estaciones().eliminar1(tblEstacion.getSelectedRow());
+        table();
     }//GEN-LAST:event_btnEliminarEActionPerformed
 
     /**
@@ -210,11 +212,12 @@ new Estaciones().eliminar1(tblEstacion.getSelectedRow());
             }
         });
     }
-    
-    public void table (){
-        DefaultTableModel tablemodel = (DefaultTableModel)tblEstacion.getModel();
-        for (Estacion e:estaciones.obtenerTodos(ERROR)) {
-            tablemodel.addRow(new Object[]{e.getNombreEstacion(),e.getDomicilioEstacion()});
+
+    public void table() {
+        DefaultTableModel tablemodel = (DefaultTableModel) tblEstacion.getModel();
+        tablemodel.setRowCount(0);
+        for (Estacion e : estaciones.obtenerTodos(ERROR)) {
+            tablemodel.addRow(new Object[]{e.getNombreEstacion(), e.getDomicilioEstacion()});
         }
         tblEstacion.setModel(tablemodel);
     }

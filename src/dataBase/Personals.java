@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
+import vistas.vistaPersonal;
 
 /**
  *
@@ -24,6 +26,7 @@ public class Personals {
     
  private String nombreP;
 private int idP;
+private String apellidoP;
 
     public List<Personal> obtenerTodos(int pos) {
         List<Personal> personal = new ArrayList<Personal>();
@@ -46,7 +49,7 @@ private int idP;
         Session session = HibernateUtil.getSessionFactory().openSession();
         
 
-        Personal per = (Personal) session.createQuery("SELECT p FROM Personal p WHERE p.apellidoPersonal='"+nombreP+"'");
+        Personal per = (Personal) session.createQuery("SELECT p FROM Personal p WHERE p.apellidoPersonal='"+nombreP+"'").uniqueResult();
  return per.getId();
     }
     
@@ -56,8 +59,48 @@ private int idP;
  
 return per.getNombrePersonal();
 }
+    public String obtenepornombreApellido (){//recupera el nombre de la estacion selecionada
+        Session session = HibernateUtil.getSessionFactory().openSession();
+           Personal per = (Personal) session.createQuery("SELECT p FROM Personal p WHERE p.nombrePersonal LIKE'%"+nombreP+"'");
+ 
+return per.getApellidoPersonal();
+} 
     
+    public List<Personal> obtenerTodosNombreApellido(int pos) {
+        List<Personal> personal = new ArrayList<Personal>();
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Personal> criteria = builder.createQuery(Personal.class);
+            criteria.from(Personal.class);
+            personal = session.createQuery("SELECT p FROM Personal p WHERE p.nombrePersonal LIKE'%"+nombreP+"%' and p.apellidoPersonal LIKE '%"+apellidoP+"%'").getResultList();
+            for (Personal i : personal) {
+             //   System.out.println(i.getNombre());
+            }
+            session.close();
+        } catch (Exception e) {
+        }
+        return personal;
+    }
     
+     public List<Personal> obtenerTodosNombre(int pos) {
+        List<Personal> personal = new ArrayList<Personal>();
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Personal> criteria = builder.createQuery(Personal.class);
+            criteria.from(Personal.class);
+            personal = session.createQuery("SELECT p FROM Personal p WHERE p.nombrePersonal LIKE'%"+nombreP+"%'").getResultList();
+            
+            session.close();
+        } catch (Exception e) {
+        }
+        return personal;
+    }
+      
+   
+    
+     
     public void guardar(Personal Personals){
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -96,18 +139,49 @@ return per.getNombrePersonal();
             System.out.println("Ocurrió un error al intentar obtener registros");
         }
     }
-    public void modificar(Personal Personals){
+//    public void modificar(Personal Personals){
+//        
+//        try {
+//            Session session = HibernateUtil.getSessionFactory().openSession();
+//            session.beginTransaction();
+//            
+//            session.update(Personals);
+//            session.getTransaction().commit();
+//            session.close();
+//        } catch (Exception e) {
+//            System.out.println("Ocurrió un error al intentar editar el objeto");
+//        }
+//    }
+    
+      public void modificar(int pos,String N,String A,String T,int E, int num){
+        
+         Personal c = new Personal();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.update(Personals);
+            c = (Personal) session.get(Personal.class, obtenerTodos(pos).get(pos).getId());
+            Personal a= new Personal();
+            
+            
+            
+            
+            c.setApellidoPersonal(A);
+            c.setNombrePersonal(N);
+            c.setIdEstacion(E);
+            c.setNumPersonal(num);        
+            c.setTipoPersonal(T);
+            
+            session.update(c);
             session.getTransaction().commit();
             session.close();
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error al intentar eliminar el objeto");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Ocurrió un error, por favor revisa los datos");
         }
     }
-
+    
+    
+    
+    
     public String getNombreP() {
         return nombreP;
     }
@@ -122,5 +196,13 @@ return per.getNombrePersonal();
 
     public void setIdP(int idP) {
         this.idP = idP;
+    }
+
+    public String getApellidoP() {
+        return apellidoP;
+    }
+
+    public void setApellidoP(String apellidoP) {
+        this.apellidoP = apellidoP;
     }
 }

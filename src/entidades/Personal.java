@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entidades;
 
 import javax.persistence.Entity;
@@ -10,22 +5,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
 /**
- *
  * @author EduardoHumberto
  */
-
 @Entity
-@Table(name="tblpersonal")
+@Table(name = "tblpersonal")
 public class Personal {
-    
+
     private int id;
     private String nombrePersonal;
     private String apellidoPersonal;
-    private String tipoPersonal ;
+    private String tipoPersonal;
     private int idEstacion;
+    private int numPersonal;
+    
+    
 
     @Id
     @GeneratedValue
@@ -53,8 +47,6 @@ public class Personal {
         this.apellidoPersonal = apellidoPersonal;
     }
 
-  
-
     public int getIdEstacion() {
         return idEstacion;
     }
@@ -71,9 +63,14 @@ public class Personal {
         this.tipoPersonal = tipoPersonal;
     }
 
+    public int getNumPersonal() {
+        return numPersonal;
+    }
+
+    public void setNumPersonal(int numPersonal) {
+        this.numPersonal = numPersonal;
+    }
+
    
-    
-    
-   
-    
+
 }
