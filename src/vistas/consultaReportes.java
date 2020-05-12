@@ -5,7 +5,6 @@
  */
 package vistas;
 
-
 import dataBase.Estaciones;
 import dataBase.Personals;
 import dataBase.Unidades;
@@ -13,7 +12,6 @@ import dataBase.incendios;
 import entidades.Personal;
 import entidades.Unidad;
 import entidades.llamadoIncendio;
-
 
 import static java.awt.image.ImageObserver.ERROR;
 import javax.swing.JOptionPane;
@@ -24,19 +22,21 @@ import javax.swing.table.DefaultTableModel;
  * @author EduardoHumberto
  */
 public class consultaReportes extends javax.swing.JFrame {
-int numIn;
-llamadoIncendio tipoIn = new llamadoIncendio();
-Estaciones es= new Estaciones();
-incendios incens= new incendios();
-Personal per = new Personal();
-Personals ps= new Personals();
-Unidad Un= new Unidad ();
-Unidades Uns = new Unidades();
-String nombreOp;
-int numU;
-int idOp;
-int idUn;
-String date;
+editarRegistro eR= new editarRegistro();
+    int numIn;
+    llamadoIncendio tipoIn = new llamadoIncendio();
+    Estaciones es = new Estaciones();
+    incendios incens = new incendios();
+    Personal per = new Personal();
+    Personals ps = new Personals();
+    Unidad Un = new Unidad();
+    Unidades Uns = new Unidades();
+    String nombreOp;
+    int numU;
+    int idOp;
+    int idUn;
+    String date;
+
     /**
      * Creates new form consultaReportes
      */
@@ -54,15 +54,19 @@ String date;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        escritorio = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableIncendios = new javax.swing.JTable();
-        buscar = new javax.swing.JButton();
-        mes = new com.toedter.calendar.JMonthChooser();
-        year = new com.toedter.calendar.JYearChooser();
         jLabel1 = new javax.swing.JLabel();
         casos = new javax.swing.JTextField();
+        mes = new com.toedter.calendar.JMonthChooser();
+        year = new com.toedter.calendar.JYearChooser();
+        buscar = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        escritorio.setBackground(new java.awt.Color(204, 204, 255));
 
         tableIncendios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,6 +86,10 @@ String date;
         });
         jScrollPane1.setViewportView(tableIncendios);
 
+        jLabel1.setText("Casos Registrados :");
+
+        casos.setEditable(false);
+
         buscar.setText("jButton1");
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,50 +97,77 @@ String date;
             }
         });
 
-        jLabel1.setText("Casos Registrados :");
+        editar.setText("e");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
+            }
+        });
 
-        casos.setEditable(false);
+        escritorio.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(casos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(mes, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(year, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(buscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(editar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(casos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addComponent(buscar)
+                        .addGap(43, 43, 43)
+                        .addComponent(editar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(casos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(escritorioLayout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(buscar))
+                            .addGroup(escritorioLayout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(editar))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(246, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buscar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(casos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(casos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60)
-                        .addComponent(buscar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+            .addComponent(escritorio)
         );
 
         pack();
@@ -140,40 +175,43 @@ String date;
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
 
-        numIn=0;
-        int d=mes.getMonth()+1;
-        
-        date=String.valueOf(year.getYear())+"-0"+String.valueOf(d);
-        
-        
-        
-incens.setFecha(date);
-        DefaultTableModel tablemodel = (DefaultTableModel)tableIncendios.getModel();
+        numIn = 0;
+        int d = mes.getMonth() + 1;
+
+        date = String.valueOf(year.getYear()) + "-0" + String.valueOf(d);
+
+        incens.setFecha(date);
+        DefaultTableModel tablemodel = (DefaultTableModel) tableIncendios.getModel();
         tablemodel.setRowCount(0);
-        numIn=0;
-        for (llamadoIncendio e:incens.obtenerFecha(ERROR)) {
-//         idOp=  e.getIdBombero();
-           idUn=e.getIdUnidad();
-           ps.setIdP(idOp);
-           nombreOp=ps.obtenerNombreP();
-           Uns.setUdU(idUn);
-           numU=Uns.obtenernumU();
-            tablemodel.addRow(new Object[]{e.getTipoIncendio(),e.getFechaIncendio(),e.getDireccionIncendio(),e.getReportanteIncendio(),
-            e.getDanoIncendio(),e.getHerramientaIncendio(),numU,nombreOp,e.getDescripcionIncendio(),e.getTipoApoyo()});
-            numIn=numIn+1;
+        numIn = 0;
+        for (llamadoIncendio e : incens.obtenerFecha(ERROR)) {
+//       
+
+            tablemodel.addRow(new Object[]{e.getTipoIncendio(), e.getFechaIncendio(), e.getDireccionIncendio(), e.getReportanteIncendio(),
+                e.getDanoIncendio(), e.getHerramientaIncendio(), e.getNumUnidad(), e.getNombreOperador(), e.getDescripcionIncendio(), e.getTipoApoyo()});
+            numIn = numIn + 1;
         }
-        
-        if(numIn==0){
-            JOptionPane.showMessageDialog(null,"No se encontraron registros");
+
+        if (numIn == 0) {
+            JOptionPane.showMessageDialog(null, "No se encontraron registros");
             table();
-        }else{
+        } else {
             tableIncendios.setModel(tablemodel);
             casos.setText(String.valueOf(numIn));
-            
+
         }
-        
-    
+
+
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+int id;
+
+incens.setId(new incendios().obtener1(tableIncendios.getSelectedRow()));
+escritorio.add(eR);  
+eR.show();
+        System.out.println(incens.getId());
+    }//GEN-LAST:event_editarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,31 +248,25 @@ incens.setFecha(date);
             }
         });
     }
-    
-    public void table (){
-        DefaultTableModel tablemodel = (DefaultTableModel)tableIncendios.getModel();
+
+    public void table() {
+        DefaultTableModel tablemodel = (DefaultTableModel) tableIncendios.getModel();
         tablemodel.setRowCount(0);
-        for (llamadoIncendio e:incens.obtenerTodos(ERROR)) {
-//            idEstacion= e.getIdEstacion();
-//            es.setIdE(idEstacion);
-//            nombree=es.obtenerNombreE();
-           idOp=  e.getIdBombero();
-           idUn=e.getIdUnidad();
-           ps.setIdP(idOp);
-           nombreOp=ps.obtenerNombreP();
-           Uns.setUdU(idUn);
-           numU=Uns.obtenernumU();
-            tablemodel.addRow(new Object[]{e.getTipoIncendio(),e.getFechaIncendio(),e.getDireccionIncendio(),e.getReportanteIncendio(),
-            e.getDanoIncendio(),e.getHerramientaIncendio(),numU,nombreOp,e.getDescripcionIncendio(),e.getTipoApoyo()});
-            numIn=numIn+1;
+        for (llamadoIncendio e : incens.obtenerTodos(ERROR)) {
+
+            tablemodel.addRow(new Object[]{e.getTipoIncendio(), e.getFechaIncendio(), e.getDireccionIncendio(), e.getReportanteIncendio(),
+                e.getDanoIncendio(), e.getHerramientaIncendio(), e.getNumUnidad(), e.getNombreOperador(), e.getDescripcionIncendio(), e.getTipoApoyo()});
+            numIn = numIn + 1;
         }
         tableIncendios.setModel(tablemodel);
         casos.setText(String.valueOf(numIn));
     }
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;
     private javax.swing.JTextField casos;
+    private javax.swing.JButton editar;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JMonthChooser mes;

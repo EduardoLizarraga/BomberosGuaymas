@@ -102,11 +102,11 @@ public class vistaPersonal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Num.Empleado", "Nombre", "Apellido", "Tipo Personal", "Estación "
+                "Num.Empleado", "Nombre", "Apellido", "Tipo Personal", "Estación ", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -275,7 +275,7 @@ public class vistaPersonal extends javax.swing.JFrame {
 
         nombree = String.valueOf(jComboEstacion.getSelectedItem());
 
-        p.setNumPersonal(Integer.parseInt(txtnumE.getText()));
+
         System.out.println(nombree);
 
         es.setNomE(nombree);
@@ -410,12 +410,14 @@ new Personals().modificar(tblEmpleado.getSelectedRow(),txtNombreP.getText(),txtA
         
         DefaultTableModel tablemodel = (DefaultTableModel) tblEmpleado.getModel();
         tablemodel.setRowCount(0);
+        
+        
         for (Personal e : ps.obtenerTodos(ERROR)) {
             idEstacion = e.getIdEstacion();
             es.setIdE(idEstacion);
-
             nombree = es.obtenerNombreE();
-            tablemodel.addRow(new Object[]{e.getNumPersonal(), e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
+            
+            tablemodel.addRow(new Object[]{ e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
             
         }
         tblEmpleado.setModel(tablemodel);
@@ -437,7 +439,7 @@ new Personals().modificar(tblEmpleado.getSelectedRow(),txtNombreP.getText(),txtA
             idEstacion = e.getIdEstacion();
             es.setIdE(idEstacion);
             nombree = es.obtenerNombreE();
-            tablemodel.addRow(new Object[]{e.getNumPersonal(), e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
+            tablemodel.addRow(new Object[]{e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
             result = result + 1;
         }
 
@@ -462,7 +464,7 @@ new Personals().modificar(tblEmpleado.getSelectedRow(),txtNombreP.getText(),txtA
             idEstacion = e.getIdEstacion();
             es.setIdE(idEstacion);
             nombree = es.obtenerNombreE();
-            tablemodel.addRow(new Object[]{e.getNumPersonal(), e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
+            tablemodel.addRow(new Object[]{e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
             result = result + 1;
 
         }

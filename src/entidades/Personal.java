@@ -17,7 +17,7 @@ public class Personal {
     private String apellidoPersonal;
     private String tipoPersonal;
     private int idEstacion;
-    private int numPersonal;
+   
     
     
 
@@ -63,13 +63,7 @@ public class Personal {
         this.tipoPersonal = tipoPersonal;
     }
 
-    public int getNumPersonal() {
-        return numPersonal;
-    }
-
-    public void setNumPersonal(int numPersonal) {
-        this.numPersonal = numPersonal;
-    }
+    
 
    
 

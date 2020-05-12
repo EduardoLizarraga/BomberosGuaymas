@@ -161,16 +161,10 @@ return per.getApellidoPersonal();
             session.beginTransaction();
             c = (Personal) session.get(Personal.class, obtenerTodos(pos).get(pos).getId());
             Personal a= new Personal();
-            
-            
-            
-            
-            c.setApellidoPersonal(A);
+             c.setApellidoPersonal(A);
             c.setNombrePersonal(N);
             c.setIdEstacion(E);
-            c.setNumPersonal(num);        
             c.setTipoPersonal(T);
-            
             session.update(c);
             session.getTransaction().commit();
             session.close();

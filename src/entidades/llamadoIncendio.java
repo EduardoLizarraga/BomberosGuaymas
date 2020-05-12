@@ -17,8 +17,8 @@ public class llamadoIncendio {
     private String reportanteIncendio;
     private String danoIncendio;
     private String herramientaIncendio;
-    private int idUnidad;
-    private int idBombero;
+    private int numUnidad;
+    private String nombreOperador;
     private String descripcionIncendio;
     private String tipoApoyo;
 
@@ -75,21 +75,9 @@ public class llamadoIncendio {
         this.herramientaIncendio = herramientaIncendio;
     }
 
-    public int getIdUnidad() {
-        return idUnidad;
-    }
+    
 
-    public void setIdUnidad(int idUnidad) {
-        this.idUnidad = idUnidad;
-    }
-
-    public int getIdBombero() {
-        return idBombero;
-    }
-
-    public void setIdBombero(int idBombero) {
-        this.idBombero = idBombero;
-    }
+   
 
     public String getDescripcionIncendio() {
         return descripcionIncendio;
@@ -113,6 +101,22 @@ public class llamadoIncendio {
 
     public void setTipoApoyo(String tipoApoyo) {
         this.tipoApoyo = tipoApoyo;
+    }
+
+    public int getNumUnidad() {
+        return numUnidad;
+    }
+
+    public void setNumUnidad(int numUnidad) {
+        this.numUnidad = numUnidad;
+    }
+
+    public String getNombreOperador() {
+        return nombreOperador;
+    }
+
+    public void setNombreOperador(String nombreOperador) {
+        this.nombreOperador = nombreOperador;
     }
 
     

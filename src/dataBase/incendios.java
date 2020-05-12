@@ -14,6 +14,7 @@ import org.hibernate.Session;
  */
 public class incendios {
     private String fecha;
+    private static int id;
     
       public List<llamadoIncendio> obtenerTodos(int pos) {
         List<llamadoIncendio> incendio = new ArrayList<llamadoIncendio>();
@@ -77,18 +78,41 @@ public class incendios {
         }
     }
        
-       
-        public void modificar(llamadoIncendio incendios){
+       public int obtener1(int pos){
+           llamadoIncendio c = new llamadoIncendio();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.update(incendios);
+            c = (llamadoIncendio) session.get(llamadoIncendio.class, obtenerTodos(pos).get(pos).getId());
+            
+          
+            session.update(c);
             session.getTransaction().commit();
             session.close();
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error al intentar eliminar el objeto");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Ocurrió un error, por favor revisa los datos");
+        }
+        return pos;
+           
+       }
+        public void modificar(int pos,String tipoI,String fecha,String dir,String tel, String dano, int unidad,
+                String nom,String des, String apoyo){
+        
+         llamadoIncendio c = new llamadoIncendio();
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            c = (llamadoIncendio) session.get(llamadoIncendio.class, obtenerTodos(pos).get(pos).getId());
+            
+          
+            session.update(c);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Ocurrió un error, por favor revisa los datos");
         }
     }
+    
 
     public String getFecha() {
         return fecha;
@@ -96,6 +120,14 @@ public class incendios {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }
