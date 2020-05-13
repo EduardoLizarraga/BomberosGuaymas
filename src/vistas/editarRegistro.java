@@ -35,6 +35,7 @@ public class editarRegistro extends javax.swing.JInternalFrame {
 Personals per = new Personals();
 Unidades Un = new Unidades ();
 Unidad U = new Unidad();
+incendios in=new incendios();
 
 
 
@@ -47,7 +48,7 @@ Unidad U = new Unidad();
         
 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 System.out.println("Fecha: "+dateFormat.format(date));
-
+        
  conboB();
   ComboU();
     }
@@ -225,8 +226,11 @@ System.out.println("Fecha: "+dateFormat.format(date));
     }//GEN-LAST:event_btnIncendioMActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
+// int pos,String tipoI,String dir,String tel, String dano, int unidad,
+//                String nom,String des, String apoyo)
         
+        new incendios().modificar(in.getId(), "3", "playitas", "6220192090", "se quemo", 3, "juan", "tuvo feo", "1");
+      System.out.println(in.getId());  
     }//GEN-LAST:event_btnAceptarActionPerformed
   public void conboB (){
          DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboBombero.getModel();

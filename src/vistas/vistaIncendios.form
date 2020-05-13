@@ -266,7 +266,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Apoyo prestado"/>
+            <Property name="text" type="java.lang.String" value="Apoyo Recibido"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboUnidad">

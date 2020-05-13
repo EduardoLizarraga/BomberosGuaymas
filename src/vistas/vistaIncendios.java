@@ -34,6 +34,7 @@ public class vistaIncendios extends javax.swing.JFrame {
 Personals per = new Personals();
 Unidades Un = new Unidades ();
 Unidad U = new Unidad();
+incendios in=new incendios();
     /**
      * Creates new form vistaIncendios
      */
@@ -134,7 +135,7 @@ System.out.println("Fecha: "+dateFormat.format(date));
 
         jLabel5.setText("Bombero      ");
 
-        jLabel6.setText("Apoyo prestado");
+        jLabel6.setText("Apoyo Recibido");
 
         jComboApoyo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ambulancia", "Policía Municipal", "Policía Federal" }));
 
@@ -355,14 +356,14 @@ Un.setUdU(unidad);
         tipo.setDanoIncendio(jTextDanos.getText());
         tipo.setHerramientaIncendio(txtHerramienta.getText());
         tipo.setNumUnidad((int) jComboUnidad.getSelectedItem());
-        System.out.println(idU);
+        System.out.println(jComboUnidad.getSelectedItem());
         tipo.setNombreOperador(jComboBombero.getSelectedItem().toString());
-        System.out.println(idbombero);
+        
         tipo.setDescripcionIncendio(txtDescripcion.getText());
         tipo.setTipoApoyo(Integer.toString(apoyo));
         
         
-         incendios in=new incendios();
+         
                     in.guardar(tipo);
     }//GEN-LAST:event_btnAceptarActionPerformed
 

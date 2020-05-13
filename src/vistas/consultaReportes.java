@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
  * @author EduardoHumberto
  */
 public class consultaReportes extends javax.swing.JFrame {
+   
 editarRegistro eR= new editarRegistro();
     int numIn;
     llamadoIncendio tipoIn = new llamadoIncendio();
@@ -205,12 +206,13 @@ editarRegistro eR= new editarRegistro();
     }//GEN-LAST:event_buscarActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-int id;
+
 
 incens.setId(new incendios().obtener1(tableIncendios.getSelectedRow()));
-escritorio.add(eR);  
-eR.show();
+escritorio.add(eR); 
         System.out.println(incens.getId());
+eR.show();
+        
     }//GEN-LAST:event_editarActionPerformed
 
     /**

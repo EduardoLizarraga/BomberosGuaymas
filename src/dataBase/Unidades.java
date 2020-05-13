@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 public class Unidades {
     
@@ -64,33 +65,45 @@ public class Unidades {
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al intentar guardar el objeto");
+            
+            JOptionPane.showMessageDialog(null,"Algo salió mal,por favor revisa los datos");
         }
     }
     
-       public void eliminar(Unidad unidad){
+      
+    public void eliminar1(int pos) {
+        Unidad u = new Unidad();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.delete(unidad);
+            u = (Unidad) session.get(Unidad.class, obtenerTodos(pos).get(pos).getId());
+            
+            session.delete(u);
             session.getTransaction().commit();
             session.close();
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error al intentar eliminar el objeto");
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error al intentar obtener registros");
         }
     }
-       
-       public void modificar(Unidad unidad){
+    
+    public void modificar(int pos,int numU,String desc,String estacion){
+        
+         Unidad u = new Unidad();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.update(unidad);
+            u = (Unidad) session.get(Unidad.class, obtenerTodos(pos).get(pos).getId());
+            u.setNumeroUnidad(numU);
+            u.setDescripcion(desc);
+            u.setEstacion(estacion);
+            session.update(u);
             session.getTransaction().commit();
             session.close();
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error al intentar eliminar el objeto");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Ocurrió un error, por favor revisa los datos");
         }
     }
+    
 
     public int getUdU() {
         return idU;

@@ -14,7 +14,7 @@ import org.hibernate.Session;
  */
 public class incendios {
     private String fecha;
-    private static int id;
+    public static int id;
     
       public List<llamadoIncendio> obtenerTodos(int pos) {
         List<llamadoIncendio> incendio = new ArrayList<llamadoIncendio>();
@@ -95,7 +95,7 @@ public class incendios {
         return pos;
            
        }
-        public void modificar(int pos,String tipoI,String fecha,String dir,String tel, String dano, int unidad,
+        public void modificar(int pos,String tipoI,String dir,String tel, String dano, int unidad,
                 String nom,String des, String apoyo){
         
          llamadoIncendio c = new llamadoIncendio();
@@ -104,7 +104,14 @@ public class incendios {
             session.beginTransaction();
             c = (llamadoIncendio) session.get(llamadoIncendio.class, obtenerTodos(pos).get(pos).getId());
             
-          
+          c.setTipoIncendio(tipoI);
+          c.setDireccionIncendio(dir);
+          c.setReportanteIncendio(tel);
+          c.setDanoIncendio(dano);
+          c.setNumUnidad(unidad);
+          c.setNombreOperador(nom);
+          c.setDescripcionIncendio(des);
+          c.setTipoApoyo(apoyo);
             session.update(c);
             session.getTransaction().commit();
             session.close();

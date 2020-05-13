@@ -21,6 +21,8 @@ import javax.persistence.Table;
 public class Unidad {
     private int id;
     private int numeroUnidad;
+    private String descripcion;
+    private String estacion;
     
     @Id
     @GeneratedValue
@@ -39,6 +41,22 @@ public class Unidad {
 
     public void setNumeroUnidad(int numeroUnidad) {
         this.numeroUnidad = numeroUnidad;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getEstacion() {
+        return estacion;
+    }
+
+    public void setEstacion(String estacion) {
+        this.estacion = estacion;
     }
     
     

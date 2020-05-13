@@ -14,7 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
-import vistas.vistaPersonal;
+
 
 /**
  *
@@ -113,17 +113,7 @@ return per.getApellidoPersonal();
         }
     }
     
-    public void eliminar(Personal Personals){
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(Personals);
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error al intentar eliminar el objeto");
-        }
-    }
+  
     
     public void eliminar1(int pos) {
         Personal c = new Personal();
@@ -139,21 +129,8 @@ return per.getApellidoPersonal();
             System.out.println("Ocurrió un error al intentar obtener registros");
         }
     }
-//    public void modificar(Personal Personals){
-//        
-//        try {
-//            Session session = HibernateUtil.getSessionFactory().openSession();
-//            session.beginTransaction();
-//            
-//            session.update(Personals);
-//            session.getTransaction().commit();
-//            session.close();
-//        } catch (Exception e) {
-//            System.out.println("Ocurrió un error al intentar editar el objeto");
-//        }
-//    }
-    
-      public void modificar(int pos,String N,String A,String T,int E, int num){
+
+      public void modificar(int pos,String N,String A,String T,int E){
         
          Personal c = new Personal();
         try {
