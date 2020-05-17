@@ -5,12 +5,22 @@
  */
 package vistas;
 
+import dataBase.Estaciones;
+import entidades.Estacion;
+import static java.awt.image.ImageObserver.ERROR;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author EduardoHumberto
  */
 public class vistaEstaciones extends javax.swing.JInternalFrame {
-
+    
+ Estaciones estaciones = new Estaciones();
+    
+    
+   
     /**
      * Creates new form vistaEstaciones
      */
@@ -27,21 +37,210 @@ public class vistaEstaciones extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        desc = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        txtEstacion = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextUbicacion = new javax.swing.JTextArea();
+        btnD = new javax.swing.JButton();
+        btnAgregarE = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblEstacion = new javax.swing.JTable();
+        Editar = new javax.swing.JButton();
+
+        setClosable(true);
+
+        desc.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setText("Nombre de estación");
+
+        jLabel2.setText("Ubicación ");
+
+        jTextUbicacion.setColumns(20);
+        jTextUbicacion.setRows(5);
+        jScrollPane1.setViewportView(jTextUbicacion);
+
+        btnD.setText("Eliminar Estacion");
+        btnD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDActionPerformed(evt);
+            }
+        });
+
+        btnAgregarE.setText("Agregar estación");
+        btnAgregarE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarEActionPerformed(evt);
+            }
+        });
+
+        tblEstacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre estación", "Ubicacion"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblEstacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEstacionMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblEstacion);
+
+        Editar.setText("jButton1");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
+
+        desc.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desc.setLayer(txtEstacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desc.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desc.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desc.setLayer(btnD, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desc.setLayer(btnAgregarE, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desc.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desc.setLayer(Editar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout descLayout = new javax.swing.GroupLayout(desc);
+        desc.setLayout(descLayout);
+        descLayout.setHorizontalGroup(
+            descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, descLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, descLayout.createSequentialGroup()
+                        .addGroup(descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                            .addComponent(txtEstacion)))
+                    .addGroup(descLayout.createSequentialGroup()
+                        .addGroup(descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Editar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAgregarE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        descLayout.setVerticalGroup(
+            descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(descLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEstacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(descLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarE)
+                    .addComponent(btnD))
+                .addGap(18, 18, 18)
+                .addComponent(Editar)
+                .addGap(65, 65, 65))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, descLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addComponent(desc)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desc)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDActionPerformed
+
+        new Estaciones().eliminar1(tblEstacion.getSelectedRow());
+        table();
+    }//GEN-LAST:event_btnDActionPerformed
+
+    private void btnAgregarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEActionPerformed
+        
+       
+   guardar();
+ 
+   
+    }//GEN-LAST:event_btnAgregarEActionPerformed
+
+    private void tblEstacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstacionMouseClicked
+txtEstacion.setText(String.valueOf(tblEstacion.getValueAt(tblEstacion.getSelectedRow(), 0)));
+        jTextUbicacion.setText(String.valueOf(tblEstacion.getValueAt(tblEstacion.getSelectedRow(), 1)));
+    }//GEN-LAST:event_tblEstacionMouseClicked
+
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+ int c=JOptionPane.showConfirmDialog(null,"¿Editar Registro?");
+if(c==0) {
+if (txtEstacion.getText().length()==0 || jTextUbicacion.getText().length()==0) {
+  JOptionPane.showMessageDialog(null,"Por favor llena todos los campos");
+}else{
+   editar();
+}}
+    }//GEN-LAST:event_EditarActionPerformed
+ public void table (){
+        DefaultTableModel tablemodel = (DefaultTableModel)tblEstacion.getModel();
+        tablemodel.setRowCount(0);
+        for (Estacion e:estaciones.obtenerTodos(ERROR)) {
+            tablemodel.addRow(new Object[]{e.getNombreEstacion(),e.getDomicilioEstacion()});
+        }
+        tblEstacion.setModel(tablemodel);
+    }
+ 
+ public void guardar(){
+     Estacion e = new Estacion();
+        e.setNombreEstacion(txtEstacion.getText());
+        e.setDomicilioEstacion(jTextUbicacion.getText());
+        Estaciones es=new Estaciones();
+        es.guardar(e);
+        table();
+ }
+ 
+ public void editar(){
+      new Estaciones().modificar(tblEstacion.getSelectedRow(),txtEstacion.getText(),jTextUbicacion.getText());
+      table();
+      
+ }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Editar;
+    private javax.swing.JButton btnAgregarE;
+    private javax.swing.JButton btnD;
+    private javax.swing.JDesktopPane desc;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextUbicacion;
+    private javax.swing.JTable tblEstacion;
+    private javax.swing.JTextField txtEstacion;
     // End of variables declaration//GEN-END:variables
 }

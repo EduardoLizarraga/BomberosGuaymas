@@ -18,6 +18,8 @@ public class menuP extends javax.swing.JFrame {
     vistaUnidades vU= new vistaUnidades();
    
     consultaReporte conR= new consultaReporte();
+    
+    vistaEstaciones vE = new vistaEstaciones();
 
     /**
      * Creates new form menuP
@@ -45,6 +47,7 @@ public class menuP extends javax.swing.JFrame {
         btnR = new javax.swing.JButton();
         btnU = new javax.swing.JButton();
         btnE = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,38 +81,51 @@ public class menuP extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Estaciondes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         esc.setLayer(btnP, javax.swing.JLayeredPane.DEFAULT_LAYER);
         esc.setLayer(btnR, javax.swing.JLayeredPane.DEFAULT_LAYER);
         esc.setLayer(btnU, javax.swing.JLayeredPane.DEFAULT_LAYER);
         esc.setLayer(btnE, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        esc.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escLayout = new javax.swing.GroupLayout(esc);
         esc.setLayout(escLayout);
         escLayout.setHorizontalGroup(
             escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escLayout.createSequentialGroup()
-                .addGap(254, 254, 254)
-                .addGroup(escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(72, 72, 72)
-                .addGroup(escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(706, Short.MAX_VALUE))
+                .addGap(283, 283, 283)
+                .addGroup(escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnP)
+                    .addGroup(escLayout.createSequentialGroup()
+                        .addGroup(escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnR, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnU, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnE))))
+                .addContainerGap(649, Short.MAX_VALUE))
         );
         escLayout.setVerticalGroup(
             escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escLayout.createSequentialGroup()
-                .addGap(162, 162, 162)
+                .addGap(189, 189, 189)
                 .addGroup(escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnP)
-                    .addComponent(btnU))
-                .addGap(30, 30, 30)
+                    .addComponent(btnR, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnE, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnR)
-                    .addComponent(btnE))
-                .addContainerGap(341, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnU, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(btnP, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(170, 170, 170))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -117,12 +133,13 @@ public class menuP extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(esc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(esc)
+            .addComponent(esc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -153,6 +170,12 @@ vU.show();
 conR.show();  
 conR.table();
     }//GEN-LAST:event_btnEActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        esc.add(vE);
+vE.show();  
+vE.table();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,5 +218,6 @@ conR.table();
     private javax.swing.JButton btnR;
     private javax.swing.JButton btnU;
     private javax.swing.JDesktopPane esc;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

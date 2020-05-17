@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
 /**
@@ -113,15 +114,20 @@ return est.getNombreEstacion();
 
 
     
-    public void modificar(Estacion estaciones){
+  public void modificar(int pos,String nom,String ubi){
+        
+         Estacion e = new Estacion();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.update(estaciones);
+            e = (Estacion) session.get(Estacion.class, obtenerTodos(pos).get(pos).getId());
+            e.setNombreEstacion(nom);
+            e.setDomicilioEstacion(ubi);
+            session.update(e);
             session.getTransaction().commit();
             session.close();
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error al intentar eliminar el objeto");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Ocurrió un error, por favor revisa los datos");
         }
     }
 
