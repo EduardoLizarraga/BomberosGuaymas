@@ -16,6 +16,7 @@ public class incendios {
     private String fecha;
     public static int id;
     
+    
       public List<llamadoIncendio> obtenerTodos(int pos) {
         List<llamadoIncendio> incendio = new ArrayList<llamadoIncendio>();
         try {
@@ -66,47 +67,21 @@ public class incendios {
     }
       
       
-       public void eliminar(llamadoIncendio incendios){
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(incendios);
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error al intentar eliminar el objeto");
-        }
-    }
        
-       public int obtener1(int pos){
-           llamadoIncendio c = new llamadoIncendio();
+       
+      
+  
+       public void modificar(String tipoI,String dir,String prop, String dano, int unidad,
+              String nom,String des, String apoyo){
+        llamadoIncendio c = new llamadoIncendio();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            c = (llamadoIncendio) session.get(llamadoIncendio.class, obtenerTodos(pos).get(pos).getId());
-            
-          
-            session.update(c);
-            session.getTransaction().commit();
-            session.close();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Ocurrió un error, por favor revisa los datos");
-        }
-        return pos;
-           
-       }
-        public void modificar(int pos,String tipoI,String dir,String tel, String dano, int unidad,
-                String nom,String des, String apoyo){
-        
-         llamadoIncendio c = new llamadoIncendio();
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            c = (llamadoIncendio) session.get(llamadoIncendio.class, obtenerTodos(pos).get(pos).getId());
+            c = (llamadoIncendio) session.createQuery("SELECT p FROM llamadoIncendio p WHERE p.id="+id).uniqueResult();
             
           c.setTipoIncendio(tipoI);
           c.setDireccionIncendio(dir);
-          c.setReportanteIncendio(tel);
+          c.setPropietario(prop);
           c.setDanoIncendio(dano);
           c.setNumUnidad(unidad);
           c.setNombreOperador(nom);
@@ -119,6 +94,43 @@ public class incendios {
             JOptionPane.showMessageDialog(null,"Ocurrió un error, por favor revisa los datos");
         }
     }
+       
+       public void eliminar1(int pos) {
+        llamadoIncendio c = new llamadoIncendio();
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            c = (llamadoIncendio) session.createQuery("SELECT p FROM llamadoIncendio p WHERE p.id="+id).uniqueResult();
+            
+            session.delete(c);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception ex) {
+            System.out.println("Ocurrió un error al intentar obtener registros");
+        }
+    }
+    public  llamadoIncendio enviar1 () {
+   
+        llamadoIncendio c = new llamadoIncendio();
+        try {
+          Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            c = (llamadoIncendio) session.createQuery("SELECT p FROM llamadoIncendio p WHERE p.id="+id).uniqueResult();
+            
+            session.close();
+        } catch (Exception e) {
+            
+        }
+        return c;
+        
+        
+    }
+        
+        
+
+       
+        
+
     
 
     public String getFecha() {
@@ -136,5 +148,7 @@ public class incendios {
     public void setId(int id) {
         this.id = id;
     }
+
+   
     
 }

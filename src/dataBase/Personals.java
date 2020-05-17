@@ -25,7 +25,7 @@ import org.hibernate.Session;
 public class Personals {
     
  private String nombreP;
-private int idP;
+static private int idP;
 private String apellidoP;
 
     public List<Personal> obtenerTodos(int pos) {
@@ -120,7 +120,7 @@ return per.getApellidoPersonal();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            c = (Personal) session.get(Personal.class, obtenerTodos(pos).get(pos).getId());
+            c = (Personal) session.createQuery("SELECT p FROM Personal p WHERE p.id="+idP).uniqueResult();
             
             session.delete(c);
             session.getTransaction().commit();
@@ -130,13 +130,13 @@ return per.getApellidoPersonal();
         }
     }
 
-      public void modificar(int pos,String N,String A,String T,int E){
+      public void modificar(String N,String A,String T,int E){
         
          Personal c = new Personal();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            c = (Personal) session.get(Personal.class, obtenerTodos(pos).get(pos).getId());
+            c = (Personal) session.createQuery("SELECT p FROM Personal p WHERE p.id="+idP).uniqueResult();
             Personal a= new Personal();
              c.setApellidoPersonal(A);
             c.setNombrePersonal(N);

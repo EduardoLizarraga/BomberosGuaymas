@@ -14,7 +14,7 @@ public class llamadoIncendio {
     private String tipoIncendio;
     private Date fechaIncendio;
     private String direccionIncendio;
-    private String reportanteIncendio;
+    private String propietario;
     private String danoIncendio;
     private String herramientaIncendio;
     private int numUnidad;
@@ -51,13 +51,7 @@ public class llamadoIncendio {
         this.direccionIncendio = direccionIncendio;
     }
 
-    public String getReportanteIncendio() {
-        return reportanteIncendio;
-    }
-
-    public void setReportanteIncendio(String reportanteIncendio) {
-        this.reportanteIncendio = reportanteIncendio;
-    }
+   
 
     public String getDanoIncendio() {
         return danoIncendio;
@@ -117,6 +111,14 @@ public class llamadoIncendio {
 
     public void setNombreOperador(String nombreOperador) {
         this.nombreOperador = nombreOperador;
+    }
+
+    public String getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
     }
 
     

@@ -16,6 +16,8 @@ public class menuP extends javax.swing.JFrame {
     vistaCrearReporte vistaCR = new vistaCrearReporte();
     
     vistaUnidades vU= new vistaUnidades();
+   
+    consultaReporte conR= new consultaReporte();
 
     /**
      * Creates new form menuP
@@ -24,8 +26,9 @@ public class menuP extends javax.swing.JFrame {
         
         initComponents();
         
-         esc.setBorder(new Fondo ("fondo2"));
-       
+//         esc.setBorder(new Fondo ("fondo2"));
+//       this.setExtendedState(WIDTH);
+        
     }
 
     /**
@@ -69,6 +72,11 @@ public class menuP extends javax.swing.JFrame {
         });
 
         btnE.setText("Consultar/editar Reporte");
+        btnE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEActionPerformed(evt);
+            }
+        });
 
         esc.setLayer(btnP, javax.swing.JLayeredPane.DEFAULT_LAYER);
         esc.setLayer(btnR, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -88,7 +96,7 @@ public class menuP extends javax.swing.JFrame {
                 .addGroup(escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(706, Short.MAX_VALUE))
         );
         escLayout.setVerticalGroup(
             escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +116,9 @@ public class menuP extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(esc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(esc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,18 +132,27 @@ public class menuP extends javax.swing.JFrame {
 esc.add(aP); 
         
 aP.show();
+aP.comboE();
     }//GEN-LAST:event_btnPActionPerformed
 
     private void btnRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRActionPerformed
         esc.add(vistaCR); 
         
 vistaCR.show();
+vistaCR.conboB();
+vistaCR.ComboU();
     }//GEN-LAST:event_btnRActionPerformed
 
     private void btnUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUActionPerformed
 esc.add(vU);
 vU.show();
     }//GEN-LAST:event_btnUActionPerformed
+
+    private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
+      esc.add(conR);
+conR.show();  
+conR.table();
+    }//GEN-LAST:event_btnEActionPerformed
 
     /**
      * @param args the command line arguments

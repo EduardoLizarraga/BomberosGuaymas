@@ -40,13 +40,7 @@ public class adminPersonal extends javax.swing.JInternalFrame {
 
         table();
 
-        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboEstacion.getModel();
-
-        for (Estacion e : es.obtenerTodos(ERROR)) {
-            comboModel.addElement(e.getNombreEstacion());
-
-        }
-        jComboEstacion.setModel(comboModel);
+        
     }
 
     /**
@@ -130,11 +124,11 @@ public class adminPersonal extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nombre", "Apellido", "Tipo Personal", "Estación "
+                "Nombre", "Apellido", "Tipo Personal", "Estación ", "Title 5"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -302,7 +296,7 @@ if(c==0)      {
 
         idEstacion = es.obteneridE();
 
-        new Personals().modificar(tblEmpleado.getSelectedRow(), txtNombreP.getText(), txtApellidoP.getText(), Integer.toString(comboTipoP.getSelectedIndex() + 1), idEstacion);
+        new Personals().modificar( txtNombreP.getText(), txtApellidoP.getText(), Integer.toString(comboTipoP.getSelectedIndex() + 1), idEstacion);
     
         table();
         }catch(NumberFormatException msj){
@@ -393,6 +387,10 @@ if(c==0)      {
     int in;
     String t;
     private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
+        int pos=tblEmpleado.getSelectedRow();
+        
+        ps.setIdP((int) tblEmpleado.getValueAt(pos,4));
+        System.out.println(ps.getIdP());
         t = String.valueOf(tblEmpleado.getValueAt(tblEmpleado.getSelectedRow(), 2));
         if (t.equals("DIRECTOR")) {
             in = 0;
@@ -417,13 +415,15 @@ if(c==0)      {
 
         for (Personal e : ps.obtenerTodos(ERROR)) {
             idEstacion = e.getIdEstacion();
+            e.getId();
             es.setIdE(idEstacion);
             nombree = es.obtenerNombreE();
 
-            tablemodel.addRow(new Object[]{e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
+            tablemodel.addRow(new Object[]{e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree,e.getId()});
 
         }
         tblEmpleado.setModel(tablemodel);
+        tblEmpleado.getColumnModel().getColumn(4).setMaxWidth(0);
     }
 
     public void bNom() {
@@ -441,8 +441,9 @@ if(c==0)      {
         for (Personal e : ps.obtenerTodosNombre(ERROR)) {
             idEstacion = e.getIdEstacion();
             es.setIdE(idEstacion);
+            e.getId();
             nombree = es.obtenerNombreE();
-            tablemodel.addRow(new Object[]{e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
+            tablemodel.addRow(new Object[]{e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree,e.getId()});
             result = result + 1;
         }
 
@@ -450,6 +451,7 @@ if(c==0)      {
             JOptionPane.showMessageDialog(null, "No se encontraron resultados");
         } else {
             tblEmpleado.setModel(tablemodel);
+            tblEmpleado.getColumnModel().getColumn(4).setMaxWidth(0);
         }
     }
 
@@ -466,8 +468,9 @@ if(c==0)      {
         for (Personal e : ps.obtenerTodosNombreApellido(ERROR)) {
             idEstacion = e.getIdEstacion();
             es.setIdE(idEstacion);
+            e.getId();
             nombree = es.obtenerNombreE();
-            tablemodel.addRow(new Object[]{e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree});
+            tablemodel.addRow(new Object[]{e.getNombrePersonal(), e.getApellidoPersonal(), e.getTipoPersonal(), nombree,e.getId()});
             result = result + 1;
 
         }
@@ -475,7 +478,18 @@ if(c==0)      {
             JOptionPane.showMessageDialog(null, "No se encontraron resultados");
         } else {
             tblEmpleado.setModel(tablemodel);
+            tblEmpleado.getColumnModel().getColumn(4).setMaxWidth(0);
         }
+    }
+    
+    public void comboE(){
+        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboEstacion.getModel();
+
+        for (Estacion e : es.obtenerTodos(ERROR)) {
+            comboModel.addElement(e.getNombreEstacion());
+
+        }
+        jComboEstacion.setModel(comboModel);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarP;

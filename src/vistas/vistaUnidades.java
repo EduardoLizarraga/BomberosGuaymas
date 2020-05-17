@@ -54,6 +54,8 @@ Unidad e = new Unidad();
         edit = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
 
+        setClosable(true);
+
         esc.setBackground(new java.awt.Color(255, 255, 255));
 
         btnAu.setText("Agregar Unidad");
@@ -191,32 +193,12 @@ Unidad e = new Unidad();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAuActionPerformed
-
-
-        if(txtDesc.getText().length()==0 ){
-            
-    JOptionPane.showMessageDialog(null,"Por favor llena todos los campos");
-}else if(jComboE.getSelectedIndex()==0){
-  JOptionPane.showMessageDialog(null,"Por favor selecciona una estación");
-}else{
-    try{    
-
-        e.setNumeroUnidad(Integer.parseInt(numUnidad.getText()));
-        e.setDescripcion(txtDesc.getText());
-        e.setEstacion(jComboE.getSelectedItem().toString());
-
-        
-        uns.guardar(e);
-         table();
-}catch(NumberFormatException msj){
-            JOptionPane.showMessageDialog(null,"Error al guardar algún tipo de dato");
-        }
-                
+guardar();
+         
     }//GEN-LAST:event_btnAuActionPerformed
-    }
+    
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-new Unidades().modificar(tblU.getSelectedRow(),Integer.parseInt(numUnidad.getText()), txtDesc.getText(), jComboE.getSelectedItem().toString());
-table();
+editar();
     }//GEN-LAST:event_editActionPerformed
 
     private void tblUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUMouseClicked
@@ -227,12 +209,7 @@ jComboE.setSelectedIndex(0);
     }//GEN-LAST:event_tblUMouseClicked
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-int c=JOptionPane.showConfirmDialog(null,"¿Eliminar unidad?");
-if(c==0)      {
-    new Unidades().eliminar1(tblU.getSelectedRow());
-}
-
-table();
+eliminar();
     }//GEN-LAST:event_eliminarActionPerformed
 public void combo(){
     DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboE.getModel();
@@ -256,6 +233,56 @@ public void table() {
         }
         tblU.setModel(tablemodel);
     }
+
+public void editar(){
+    if(txtDesc.getText().length()==0 ){
+            
+    JOptionPane.showMessageDialog(null,"Por favor llena todos los campos");
+}else if(jComboE.getSelectedIndex()==0){
+  JOptionPane.showMessageDialog(null,"Por favor selecciona una estación");
+}else{
+    try{ 
+int c=JOptionPane.showConfirmDialog(null,"¿Editar está Unidad?");
+if(c==0)      {
+   new Unidades().modificar(tblU.getSelectedRow(),Integer.parseInt(numUnidad.getText()), txtDesc.getText(), jComboE.getSelectedItem().toString());
+table();
+}}catch(NumberFormatException msj){
+            JOptionPane.showMessageDialog(null,"Error al guardar algún tipo de dato");
+        }
+}
+}
+
+public void guardar(){
+    
+        if(txtDesc.getText().length()==0 ){
+            
+    JOptionPane.showMessageDialog(null,"Por favor llena todos los campos");
+}else if(jComboE.getSelectedIndex()==0){
+  JOptionPane.showMessageDialog(null,"Por favor selecciona una estación");
+}else{
+    try{    
+
+        e.setNumeroUnidad(Integer.parseInt(numUnidad.getText()));
+        e.setDescripcion(txtDesc.getText());
+        e.setEstacion(jComboE.getSelectedItem().toString());
+
+        
+        uns.guardar(e);
+         table();
+}catch(NumberFormatException msj){
+            JOptionPane.showMessageDialog(null,"Error al guardar algún tipo de dato");
+        }
+}  
+}
+
+public void  eliminar(){
+    int c=JOptionPane.showConfirmDialog(null,"¿Eliminar unidad?");
+if(c==0)      {
+    new Unidades().eliminar1(tblU.getSelectedRow());
+}
+
+table();
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAu;
