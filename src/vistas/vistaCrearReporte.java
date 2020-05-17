@@ -137,7 +137,7 @@ incendios in=new incendios();
 
         jLabel6.setText("Apoyo Recibido");
 
-        jComboApoyo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ambulancia", "Policía Municipal", "Policía Federal" }));
+        jComboApoyo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Ambulancia", "Policía Municipal", "Policía Federal" }));
 
         jLabel7.setText("Descripción del servicio :");
 
@@ -329,11 +329,45 @@ incendios in=new incendios();
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
+                if(tipoI==0){
+            
+    JOptionPane.showMessageDialog(null,"Por favor selecciona un tipo de incendio");
+}else if (txtProp.getText().length()==0 || txtdir.getText().length()==0 || jTextDanos.getText().length()==0 || txtHerramienta.getText().length()==0
+        ||txtDescripcion.getText().length()==0 ){
+  JOptionPane.showMessageDialog(null,"Por favor llena todos los campos");
+}else{
+    try{    
+ guardar();
+        
+         
+}catch(NumberFormatException msj){
+            JOptionPane.showMessageDialog(null,"Error al guardar algún tipo de dato");
+        }
+                
+    }
+        
+    }//GEN-LAST:event_btnAceptarActionPerformed
+public void conboB (){
+         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboBombero.getModel();
+      for (Personal e: per.obtenerTodos(ERROR)){
+     comboModel.addElement(e.getApellidoPersonal()+" "+e.getNombrePersonal());
+                     
+       }
+        jComboBombero.setModel(comboModel);
+    }
+    
+    public void ComboU(){
+        DefaultComboBoxModel comboModel2 = (DefaultComboBoxModel) jComboUnidad.getModel();
+      for (Unidad e: Un.obtenerTodos(ERROR)){
+     comboModel2.addElement((e.getNumeroUnidad()));
+                     
+       }
+        jComboUnidad.setModel(comboModel2);
+    }
+    
+    public void guardar(){
         apoyo= jComboApoyo.getSelectedIndex()+1;
-        //        int dia = fecha.get(Calendar.DATE);
-        //        Calendar.
-        //        int mes= fecha.get(Calendar.MONTH);
-        //        int año = Calendar.YEAR;
+        
 
         Date date = new Date();
 
@@ -352,23 +386,6 @@ incendios in=new incendios();
         tipo.setTipoApoyo(Integer.toString(apoyo));
 
         in.guardar(tipo);
-    }//GEN-LAST:event_btnAceptarActionPerformed
-public void conboB (){
-         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboBombero.getModel();
-      for (Personal e: per.obtenerTodos(ERROR)){
-     comboModel.addElement(e.getApellidoPersonal()+" "+e.getNombrePersonal());
-                     
-       }
-        jComboBombero.setModel(comboModel);
-    }
-    
-    public void ComboU(){
-        DefaultComboBoxModel comboModel2 = (DefaultComboBoxModel) jComboUnidad.getModel();
-      for (Unidad e: Un.obtenerTodos(ERROR)){
-     comboModel2.addElement((e.getNumeroUnidad()));
-                     
-       }
-        jComboUnidad.setModel(comboModel2);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

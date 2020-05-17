@@ -134,7 +134,7 @@ incendios in=new incendios();
 
         jLabel6.setText("Apoyo Recibido");
 
-        jComboApoyo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ambulancia", "Policía Municipal", "Policía Federal" }));
+        jComboApoyo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Ambulancia", "Policía Municipal", "Policía Federal" }));
 
         jLabel3.setText("Descripción de   daños :");
 
@@ -303,20 +303,26 @@ incendios in=new incendios();
     }//GEN-LAST:event_btnIncendioMActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
-        apoyo= jComboApoyo.getSelectedIndex()+1;
-        //        int dia = fecha.get(Calendar.DATE);
-        //        Calendar.
-        //        int mes= fecha.get(Calendar.MONTH);
-        //        int año = Calendar.YEAR;
-
-
-       
+ int c=JOptionPane.showConfirmDialog(null,"¿Editar Registro?");
+if(c==0)      {
+         if(tipoI==0){
+            
+    JOptionPane.showMessageDialog(null,"Por favor selecciona un tipo de incendio");
+}else if (txtProp.getText().length()==0 || txtdirec.getText().length()==0 || jTextDanos.getText().length()==0 || txtHerramienta.getText().length()==0
+        ||txtDescripcion.getText().length()==0 ){
+  JOptionPane.showMessageDialog(null,"Por favor llena todos los campos");
+}else{
+    try{    
+ editar();
         
-        new incendios().modificar(Integer.toString(tipoI),txtdirec.getText(),txtProp.getText(), jTextDanos.getText(),
-                (int) jComboUnidad.getSelectedItem(), jComboBombero.getSelectedItem().toString(), txtDescripcion.getText(), 
-                Integer.toString(apoyo));
-//        
+         
+}catch(NumberFormatException msj){
+            JOptionPane.showMessageDialog(null,"Error al guardar algún tipo de dato");
+        }
+                
+    }}
+        
+
         
     }//GEN-LAST:event_btnAceptarActionPerformed
   public void conboB (){
@@ -355,13 +361,17 @@ String tipo=in.enviar1().getTipoIncendio();
         
 int i=0;
 String Tapoyo=in.enviar1().getTipoApoyo();
- if (Tapoyo.equals("Ambulancia")) {
+//ENUM('NINGUNO', 'AMBULANCIA', 'POLICIAM', 'POLICIAF')
+ if (Tapoyo.equals("NINGUNO")) {
             i = 0;
-        } else if (Tapoyo.equals("Policía Municipal")) {
+        } else if (Tapoyo.equals("AMBULANCIA")) {
             i = 1;
-        } else if (Tapoyo.equals("Policía Federal")) {
+        } else if (Tapoyo.equals("POLICIAM")) {
             i = 2;
-        }
+        }else if (Tapoyo.equals("POLICIAF")) {
+            i=3;
+    
+}
  tipoI=ti;
     System.out.println(tipoI);
 txtProp.setText(in.enviar1().getPropietario());
@@ -374,6 +384,13 @@ txtHerramienta.setText(in.enviar1().getHerramientaIncendio());
 txtDescripcion.setText(in.enviar1().getDescripcionIncendio());
 
     
+}
+public void editar(){
+    apoyo= jComboApoyo.getSelectedIndex()+1;
+       
+new incendios().modificar(Integer.toString(tipoI),txtdirec.getText(),txtProp.getText(), jTextDanos.getText(),
+                (int) jComboUnidad.getSelectedItem(), jComboBombero.getSelectedItem().toString(), txtDescripcion.getText(), 
+                Integer.toString(apoyo));
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
